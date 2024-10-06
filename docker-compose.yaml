@@ -44,6 +44,21 @@ services:
     networks:
       - pyspark-network
 
+  sonarqube:
+    image: sonarqube:latest
+    container_name: sonarqube
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:mysql://db:3306/${MYSQL_DATABASE}
+      - SONARQUBE_JDBC_USERNAME=${PMA_USER}
+      - SONARQUBE_JDBC_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - SONARQUBE_ADMIN_PASSWORD=${PMA_PASSWORD}
+    ports:
+      - "9000:9000"
+    networks:
+      - pyspark-network
+    depends_on:
+      - mysql
+
 networks:
   pyspark-network:
     driver: bridge
