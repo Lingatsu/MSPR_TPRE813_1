@@ -13,7 +13,7 @@ services:
       - pyspark-network
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./scripts_sql:/docker-entrypoint-initdb.d
+      - ./scripts_sql_init:/docker-entrypoint-initdb.d
 
   jupyter:
     build:
@@ -41,6 +41,8 @@ services:
       - "8080:80"  # Exposer phpMyAdmin sur le port 8080
     depends_on:
       - mysql
+    volumes:
+      - ./scripts_sql_phpmyadmin:/var/www/html/sql
     networks:
       - pyspark-network
 

@@ -36,5 +36,12 @@ CREATE TABLE IF NOT EXISTS elections (
     bureau VARCHAR(7),
     nuance VARCHAR(8),
     pourcentage_voix_inscrits DOUBLE,
-    CONSTRAINT PK_Fait PRIMARY KEY (codecommune,annee,tour, bureau, nuance, type_election)
+    CONSTRAINT PK_Elections PRIMARY KEY (codecommune,annee,tour, bureau, nuance, type_election)
+);
+
+CREATE TABLE IF NOT EXISTS crimes (
+    codecommune INT,
+    annee INT,
+    crimes_delits INT,
+    CONSTRAINT PK_Fait PRIMARY KEY (codecommune,annee)
 );
