@@ -3,16 +3,17 @@ services:
     image: mysql:latest
     container_name: db
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mspr1
       #MYSQL_USER: ${MYSQL_USER}
       #MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
     networks:
       - pyspark-network
-    tmpfs:
-      - /var/lib/mysql
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./scripts_sql:/docker-entrypoint-initdb.d
 
   jupyter:
     build:
@@ -33,9 +34,9 @@ services:
     image: phpmyadmin:latest
     container_name: phpmyadmin
     environment:
-      PMA_HOST: ${PMA_HOST}
-      PMA_USER: ${PMA_USER}
-      PMA_PASSWORD: ${PMA_PASSWORD}
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
     ports:
       - "8080:80"  # Exposer phpMyAdmin sur le port 8080
     depends_on:
@@ -63,4 +64,4 @@ networks:
     driver: bridge
 
 volumes:
-  db_data:
+  mysql_data:
