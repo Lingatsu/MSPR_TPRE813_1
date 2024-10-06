@@ -26,3 +26,15 @@ CREATE TABLE IF NOT EXISTS faits (
     population INT,
     CONSTRAINT PK_Fait PRIMARY KEY (codecommune,annee)
 );
+
+CREATE TABLE IF NOT EXISTS elections (
+    id_election VARCHAR(20),
+    annee INT,
+    type_election VARCHAR(10),
+    tour VARCHAR(3),
+    codecommune INT,
+    bureau VARCHAR(7),
+    nuance VARCHAR(8),
+    pourcentage_voix_inscrits DOUBLE,
+    CONSTRAINT PK_Fait PRIMARY KEY (codecommune,annee,tour, bureau, nuance, type_election)
+);
