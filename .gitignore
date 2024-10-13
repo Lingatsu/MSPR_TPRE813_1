@@ -1,5 +1,10 @@
 # Ignorer le fichier .env
 .env
 
+# Ignorer le répertoire mysql_data
+mysql_data/*
+
+scripts_sql_phpmyadmin/*
+
 # Ignorer toute les datas
-# ./work/data/*
+work/data/*

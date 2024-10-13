@@ -5,6 +5,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: mspr1
+      MYSQL_MAX_ALLOWED_PACKET: "1536M"
       #MYSQL_USER: ${MYSQL_USER}
       #MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
@@ -12,7 +13,7 @@ services:
     networks:
       - pyspark-network
     volumes:
-      - mysql_data:/var/lib/mysql
+      - ./mysql_data:/var/lib/mysql
       - ./scripts_sql_init:/docker-entrypoint-initdb.d
 
   jupyter:
@@ -64,6 +65,3 @@ services:
 networks:
   pyspark-network:
     driver: bridge
-
-volumes:
-  mysql_data:
